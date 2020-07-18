@@ -1,10 +1,24 @@
 const { I } = inject();
 
-Given('я нахожусь на странице логина', () => {
+Given('я залогинен как пользователь:', table => {
 	I.amOnPage('/login');
+
+	const tableData = table.parse().rawData;
+
+	tableData.forEach(row => {
+		I.fillField(row[0], row[1]);
+	});
+
+	I.click("#loginBtn");
+
+	I.waitForText('Вы успешно вошли, user');
 });
 
-When('я заполняю поля формы:', table => {
+When('я нахожусь на странице добавления заведения', () => {
+	I.amOnPage('/locations/new');
+});
+
+When('я заполняю поля формы добавления:', table => {
 	const tableData = table.parse().rawData;
 
 	tableData.forEach(row => {
@@ -12,10 +26,10 @@ When('я заполняю поля формы:', table => {
 	});
 });
 
-When('нажимаю на кнопку {string}', btnName => {
+When('я нажму на кнопку {string}', (btnName) => {
 	I.click(btnName);
 });
 
-Then('я вижу текст {string}', () => {
-	I.waitForText('Вы успешно вошли, user');
+Then('я попадаю на страницу списка заведений', () => {
+	I.amOnPage('/');
 });
