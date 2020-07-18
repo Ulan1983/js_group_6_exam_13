@@ -65,11 +65,11 @@ const MainPage = () => {
 								<Grid className={classes.gridBtn}>
 									<Button
 										variant="contained"
-										color="primary"
+										color="secondary"
 										type="submit"
 										onClick={() => dispatch(deleteLocation(location._id))}
 									>
-										Удалить
+										Удалить заведение
 									</Button>
 								</Grid>
 								}
