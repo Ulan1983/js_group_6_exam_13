@@ -11,6 +11,8 @@ const photosReducer = (state = initialState, action) => {
 			return {...state, photos: action.photos};
 		case FETCH_PHOTOS_FAILURE:
 			return {...state, error: action.error};
+		default:
+			return state;
 	}
 };
 

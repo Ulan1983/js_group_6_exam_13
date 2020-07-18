@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const PictureSchema = new Schema({
 	photo: {
-		type: String
+		type: String,
+		required: true
 	},
 	user: {
 		type: Schema.Types.ObjectID,
