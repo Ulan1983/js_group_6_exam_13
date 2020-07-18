@@ -4,3 +4,6 @@ node_modules
 /public/uploads/userAvatar/*
 /public/uploads/locationImage/*
 /public/uploads/photoGallery/*
+!/public/uploads/locationImage/frunze.jpg
+!/public/uploads/locationImage/arzu.jpg
+!/public/uploads/locationImage/barashek.jpg

@@ -56,6 +56,9 @@ const useStyles = makeStyles({
 	},
 	img: {
 		maxWidth: '150px'
+	},
+	gallery: {
+		textAlign: 'center'
 	}
 });
 
@@ -114,6 +117,7 @@ const LocationInfo = props => {
 	let serviceRating = 0;
 	let interiorRating = 0;
 
+
 	singleLocation && reviews && reviews.forEach(review => {
 		if (singleLocation._id === review.location._id) {
 			foodRating += review.foodRating / reviews.length;
@@ -142,36 +146,39 @@ const LocationInfo = props => {
 					</CardContent>
 				</Card>
 
-				<Typography variant="h5" className={classes.title}>
+				<Typography variant="h5" className={classes.gallery}>
 					Фотогалерея
 				</Typography>
 
-				{singleLocation && photos && photos.map(photo => (
-					<Grid item key={photo._id}>
-						{singleLocation._id === photo.location._id &&
-						<Grid item>
-							<img
-								src={`http://localhost:8000/uploads/photoGallery/${photo.photo}`}
-								alt={photo._id}
-								className={classes.img}
-							/>
+				<Grid container>
+					{singleLocation && photos && photos.map(photo => (
+						<Grid item xs={12} md={6} lg={2} key={photo._id}>
+							{singleLocation._id === photo.location._id &&
+							<Grid item>
+								<img
+									src={`http://localhost:8000/uploads/photoGallery/${photo.photo}`}
+									alt={photo._id}
+									className={classes.img}
+								/>
 
-							{user && user.role === 'admin' &&
-							<Grid className={classes.deleteBtn}>
-								<Button
-									variant="contained"
-									color="secondary"
-									type="submit"
-									onClick={() => dispatch(deletePhoto(photo._id))}
-								>
-									Удалить фото
-								</Button>
+								{user && user.role === 'admin' &&
+								<Grid className={classes.deleteBtn}>
+									<Button
+										variant="contained"
+										color="secondary"
+										type="submit"
+										onClick={() => dispatch(deletePhoto(photo._id))}
+									>
+										Удалить фото
+									</Button>
+								</Grid>
+								}
 							</Grid>
 							}
 						</Grid>
-						}
-					</Grid>
-				))}
+					))}
+				</Grid>
+
 				<Typography variant="h5" className={classes.title}>
 					Средние рейтинги
 				</Typography>
