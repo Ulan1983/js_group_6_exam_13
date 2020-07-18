@@ -2,21 +2,21 @@ const express = require('express');
 
 const auth = require('../middlewares/auth');
 const permit = require('../middlewares/permit');
-const upload = require('../multer');
 
+const Review = require('../models/Review');
 const Location = require('../models/Location');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
 	try {
-		const locations = await Location.find().populate('user');
+		const reviews = await Review.find().populate('location').populate('user');
 
-		if (!locations) {
+		if (!reviews) {
 			return res.status(404).send({error: 'Not found'});
 		}
 
-		return res.send(locations);
+		return res.send(reviews);
 	} catch (e) {
 		return res.status(500).send(e);
 	}
@@ -24,40 +24,35 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 	try {
-		const location = await Location.findOne({_id: req.params.id}).populate('user');
+		const review = await Review.findOne({_id: req.params.id});
 
-		if (!location) {
+		if (!review) {
 			return res.status(404).send({error: 'Not found'});
 		}
 
-		return res.send(location);
+		return res.send(review);
 	} catch (e) {
 		return res.status(500).send(e);
 	}
 });
 
-router.post('/', [auth, upload.single('image')], async (req, res) => {
+router.post('/:id', auth, async (req, res) => {
 	try {
-		const locationData = req.body;
+		const reviewData = req.body;
+		const location = await Location.findById(req.params.id);
 
-		if (req.file) {
-			locationData.image = req.file.filename;
-		}
-
-		if (!locationData.isRulesAccepted) {
-			return res.status(400).send({error: 'You did not accept the rules'});
-		}
-
-		const location = new Location({
-			title: locationData.title,
-			description: locationData.description,
-			image: locationData.image,
-			user: req.user
+		const review = new Review({
+			user: req.user._id,
+			location: location._id,
+			comment: reviewData.comment,
+			foodRating: reviewData.foodRating,
+			serviceRating: reviewData.serviceRating,
+			interiorRating: reviewData.interiorRating
 		});
 
-		await location.save();
+		await review.save();
 
-		return res.send(location);
+		return res.send(review);
 	} catch (e) {
 		return res.status(500).send(e);
 	}
@@ -65,13 +60,13 @@ router.post('/', [auth, upload.single('image')], async (req, res) => {
 
 router.delete('/:id', [auth, permit('admin')], async (req, res) => {
 	try {
-		const location = await Location.findOne({_id: req.params.id});
+		const review = await Review.findOne({_id: req.params.id});
 
-		if (!location) {
+		if (!review) {
 			return res.status(404).send({error: 'Not found'});
 		}
 
-		await location.delete();
+		await review.delete();
 
 		return res.send({message: 'Deleted successfully'});
 	} catch (e) {
