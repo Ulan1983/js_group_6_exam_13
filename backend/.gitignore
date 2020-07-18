@@ -1,0 +1,5 @@
+node_modules
+.idea
+
+/public/uploads/userAvatar/*
+/public/uploads/locationImage/*

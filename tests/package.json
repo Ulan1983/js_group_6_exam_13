@@ -1,0 +1,13 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx codeceptjs run --steps"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "codeceptjs": "^2.6.6",
+    "puppeteer": "^5.1.0"
+  }
+}
