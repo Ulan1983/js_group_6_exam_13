@@ -33,3 +33,20 @@ When('я нажму на кнопку {string}', (btnName) => {
 Then('я попадаю на страницу списка заведений', () => {
 	I.amOnPage('/');
 });
+
+When('я нахожусь на странице списка заведений', () => {
+	I.amOnPage('/');
+});
+
+When('я нажимаю на изображение {string}', (btnName) => {
+	I.click(btnName);
+});
+
+When('я нажимаю на поле {string}', (btnName) => {
+	I.click(btnName);
+});
+
+Then('я вижу текст {string}', () => {
+	I.waitForText('Вы успешно добавили отзыв');
+});
+

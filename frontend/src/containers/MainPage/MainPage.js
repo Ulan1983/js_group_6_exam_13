@@ -50,6 +50,7 @@ const MainPage = () => {
 								<CardContent>
 									<NavLink to={`/location/${location._id}`}>
 										<CardMedia
+											id="img"
 											className={classes.media}
 											image={location.image ?
 												`http://localhost:8000/uploads/locationImage/${location.image}`

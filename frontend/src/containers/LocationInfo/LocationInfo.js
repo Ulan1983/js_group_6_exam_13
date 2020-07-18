@@ -58,7 +58,9 @@ const useStyles = makeStyles({
 		maxWidth: '150px'
 	},
 	gallery: {
-		textAlign: 'center'
+		textAlign: 'center',
+		marginTop: '2%',
+		marginBottom: '2%'
 	}
 });
 
