@@ -120,6 +120,7 @@ const FormElement = props => {
 			}}>
 				<Checkbox
 					checked={props.value}
+					required={props.required}
 					onChange={props.onChange}
 					name={props.propertyName}
 					inputProps={{ 'aria-label': 'primary checkbox' }}

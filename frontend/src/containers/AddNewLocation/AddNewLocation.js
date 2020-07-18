@@ -111,7 +111,7 @@ const AddNewLocation = () => {
 							</Grid>
 							<Grid item className={classes.checkBox}>
 								<FormElement
-									required
+									required={!location.isRulesAccepted}
 									type='checkbox'
 									propertyName='isRulesAccepted'
 									title="Вы соглашаетесь с нашими правилами"

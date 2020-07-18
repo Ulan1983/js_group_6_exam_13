@@ -68,6 +68,7 @@ export const deleteLocation = id => {
 				position: toast.POSITION.TOP_RIGHT
 			});
 			dispatch(push('/'));
+			dispatch(fetchLocations());
 		} catch (error) {
 			dispatch(deleteLocationFailure(error));
 		}

@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {makeStyles} from "@material-ui/core/styles";
-import {fetchLocations} from "../../store/actions/locationsActions";
+import {deleteLocation, fetchLocations} from "../../store/actions/locationsActions";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import {NavLink} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
 	grid: {
@@ -23,10 +24,14 @@ const useStyles = makeStyles({
 		height: 200,
 		marginBottom: '2%'
 	},
+	gridBtn: {
+		marginBottom: '3%'
+	}
 });
 
-const MainPage = (props) => {
+const MainPage = () => {
 	const locations = useSelector(state => state.locations.locations);
+	const user = useSelector(state => state.users.user);
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
@@ -56,6 +61,18 @@ const MainPage = (props) => {
 										</Typography>
 									</NavLink>
 								</CardContent>
+								{user && user.role === 'admin' &&
+								<Grid className={classes.gridBtn}>
+									<Button
+										variant="contained"
+										color="primary"
+										type="submit"
+										onClick={() => dispatch(deleteLocation(location._id))}
+									>
+										Удалить
+									</Button>
+								</Grid>
+								}
 							</Card>
 						</Grid>
 					))
