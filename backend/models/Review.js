@@ -6,12 +6,10 @@ const ReviewSchema = new Schema({
 	user: {
 		type: Schema.Types.ObjectID,
 		ref: 'User',
-		required: true
 	},
 	location: {
 		type: Schema.Types.ObjectID,
 		ref: 'Location',
-		required: true
 	},
 	comment: {
 		type: String,

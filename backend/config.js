@@ -15,6 +15,7 @@ module.exports = {
 	rootPath,
 	userAvatar: path.join(rootPath, 'public/uploads/userAvatar'),
 	locationImage: path.join(rootPath, 'public/uploads/locationImage'),
+	photoGallery: path.join(rootPath, 'public/uploads/photoGallery'),
 	database,
 	databaseOptions: {
 		useNewUrlParser: true,
