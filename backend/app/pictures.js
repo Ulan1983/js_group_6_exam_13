@@ -4,6 +4,7 @@ const auth = require('../middlewares/auth');
 const permit = require('../middlewares/permit');
 const upload = require('../multer');
 
+const Location = require('../models/Location');
 const Picture = require('../models/Picture');
 
 const router = express.Router();
@@ -22,16 +23,19 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.post('/', [auth, upload.single('photo')], async (req, res) => {
+router.post('/:id', [auth, upload.single('photo')], async (req, res) => {
 	try {
 		const pictureData = req.body;
+		const location = await Location.findById(req.params.id);
 
 		if (req.file) {
 			pictureData.photo = req.file.filename;
 		}
 
 		const picture = new Picture({
-			photo: pictureData.photo
+			photo: pictureData.photo,
+			user: req.user._id,
+			location: location._id,
 		});
 
 		await picture.save();

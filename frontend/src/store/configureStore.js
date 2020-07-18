@@ -7,6 +7,7 @@ import {loadFromLocalStorage, localStorageMiddleware} from "./localStorage";
 import usersReducer from "./reducers/usersReducer";
 import locationsReducer from "./reducers/locationsReducer";
 import reviewsReducer from "./reducers/reviewsReducer";
+import photosReducer from "./reducers/photosReducer";
 
 export const history = createBrowserHistory();
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
 	users: usersReducer,
 	locations: locationsReducer,
 	reviews: reviewsReducer,
+	photos: photosReducer
 });
 
 const middleware = [

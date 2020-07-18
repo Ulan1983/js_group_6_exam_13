@@ -8,11 +8,13 @@ const PictureSchema = new Schema({
 	},
 	user: {
 		type: Schema.Types.ObjectID,
-		ref: 'User'
+		ref: 'User',
+		required: true
 	},
 	location: {
 		type: Schema.Types.ObjectID,
 		ref: 'Location',
+		required: true
 	},
 });
 
